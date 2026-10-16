@@ -54,7 +54,6 @@
         .section-head h3 { color: var(--gold-light); font-size: 26px; margin: 0 0 5px 0; font-family: var(--font-serif); }
         .section-head p { color: var(--text-sub); margin: 0; }
 
-        /* 명단 */
         .guest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; padding: 20px 0; width: 100%; box-sizing: border-box; align-items: stretch; }
         .guest-card { background: rgba(0,0,0,0.6); border: 1px solid var(--gold-dark); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s; display: flex; flex-direction: column; }
         .guest-card:hover { border-color: var(--gold-light); transform: translateY(-5px); }
@@ -66,7 +65,6 @@
         #btn-floating-guest { position: absolute; bottom: 30px; right: 30px; z-index: 50; display: none; padding: 10px 26px; border-radius: 30px; font-size: 15px; font-weight: bold; border: 1px solid var(--gold-main); background: rgba(0,0,0,0.8); color: var(--gold-light); cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.6); transition: 0.2s; }
         #btn-floating-guest:hover { background: var(--gold-dark); color: #fff; transform: scale(1.05); }
 
-        /* 로비 */
         .char-list { display: flex; gap: 30px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
         .char-card-v2 { width: 260px; height: 380px; background-color: #222; background-size: cover; background-position: center; border-radius: 12px; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; transition: 0.3s; position: relative; border: 1px solid var(--gold-dark); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
         .char-card-v2:hover { transform: translateY(-10px); border-color: var(--gold-light); box-shadow: 0 0 20px var(--gold-dark); }
@@ -74,7 +72,6 @@
         .char-details h2 { margin: 0; color: var(--gold-light); font-family: var(--font-serif); font-size: 26px; }
         .char-details div { color: #aaa; font-size: 13px; letter-spacing: 1px; margin-top: 5px; }
 
-        /* 소지품 */
         .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
         .item-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
         .item-card:hover { border-color: var(--gold-dark); }
@@ -84,7 +81,6 @@
         .item-delete-btn { position: absolute; top: 12px; right: 12px; width: 22px; height: 22px; border: 1px solid #fff; border-radius: 4px; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; font-weight: bold; transition: 0.2s; background: rgba(0,0,0,0.3); }
         .item-delete-btn:hover { background: #ff3333; border-color: #ff3333; }
 
-        /* 아이템 갤러리 */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
         .gallery-card { background: rgba(0,0,0,0.55); border: 1px solid var(--gold-dark); border-radius: 12px; padding: 14px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
         .gallery-card:hover { border-color: var(--gold-light); transform: translateY(-5px); box-shadow: 0 0 18px rgba(140,112,59,0.5); }
@@ -93,7 +89,6 @@
         .gallery-name { color: var(--gold-light); font-weight: bold; font-size: 17px; text-align: center; margin-bottom: 6px; }
         .gallery-desc { color: #bbb; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
 
-        /* 모달 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box; }
         .modal-box { background: var(--panel-bg); border: 1px solid var(--gold-main); padding: 30px; border-radius: 12px; text-align: center; width: 380px; max-width: 100%; max-height: 90vh; overflow-y: auto; box-sizing: border-box; box-shadow: 0 0 30px rgba(0,0,0,0.7); }
         .modal-box h3 { color: var(--gold-light); font-size: 22px; margin-top: 0; }
@@ -101,7 +96,6 @@
         .heal-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--text-sub); color: #fff; border-radius: 4px; box-sizing: border-box; margin-bottom: 12px; font-size: 15px; text-align: center; font-family: var(--font-main); }
         .heal-input:focus { outline: none; border-color: var(--gold-main); background: rgba(0,0,0,0.8); }
 
-        /* 작전 구상 */
         .plan-layout { display: flex; gap: 20px; align-items: flex-start; }
         .plan-side { flex: 0 0 230px; position: sticky; top: 0; background: rgba(15,14,18,0.8); border: 1px solid var(--gold-dark); border-radius: 10px; padding: 14px; box-sizing: border-box; }
         .plan-side-head { display: flex; justify-content: space-between; align-items: center; color: var(--gold-light); font-family: var(--font-serif); font-size: 17px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(140,112,59,0.3); }
@@ -193,7 +187,6 @@
         </div>
     </div>
 
-    <!-- 공용 확인 모달 -->
     <div id="modal-confirm" class="modal-overlay">
         <div class="modal-box">
             <h3 id="mc-title">확인</h3>
@@ -220,7 +213,6 @@
         </div>
     </div>
 
-    <!-- 소지품 양도 모달 -->
     <div id="modal-transfer" class="modal-overlay">
         <div class="modal-box">
             <h3 id="mt-item">아이템 이름</h3>
@@ -235,7 +227,6 @@
         </div>
     </div>
 
-    <!-- 아이템 상세 모달 -->
     <div id="modal-item" class="modal-overlay">
         <div class="modal-box" style="width:440px;">
             <div id="mi-img" style="margin-bottom:15px;"></div>
@@ -245,7 +236,6 @@
         </div>
     </div>
 
-    <!-- 로그인 -->
     <div id="view-login" class="view active" style="justify-content: center;">
         <div class="login-box">
             <h2 style="color: var(--gold-light); font-family: var(--font-serif); margin-bottom: 30px;">ACCESS CODE</h2>
@@ -254,12 +244,10 @@
         </div>
     </div>
 
-    <!-- 로비 -->
     <div id="view-lobby" class="view">
         <div class="char-list" id="screen-list"></div>
     </div>
 
-    <!-- 공지 -->
     <div id="view-info" class="view">
         <div class="section-head">
             <h3>📢 시스템 공지사항</h3>
@@ -273,14 +261,13 @@
         <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px;">
             <div>
                 <h3>아이템</h3>
-                <p>지금까지 확보한 아이템입니다. 카드를 누르면 자세히 볼 수 있습니다.</p>
+                <p>지금까지 확보한 아이템.</p>
             </div>
             <span id="items-count" style="color:var(--gold-main); font-size:14px;"></span>
         </div>
         <div class="gallery-grid" id="items-list"></div>
     </div>
 
-    <!-- 작전 구상 -->
     <div id="view-plan" class="view">
         <div class="plan-layout">
             <aside class="plan-side">
@@ -318,7 +305,6 @@
         </div>
     </div>
 
-    <!-- 소지품 -->
     <div id="view-inventory" class="view">
         <div style="margin-bottom:5px; padding-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1);">
             <h3 style="color:var(--gold-light); font-size:26px; margin:0 0 5px 0; font-family:var(--font-serif);">내 소지품 목록</h3>
@@ -329,7 +315,6 @@
 
     <button id="btn-floating-guest" onclick="nav('guest-list', '명단')">명단</button>
 
-    <!-- 명단 -->
     <div id="view-guest-list" class="view">
         <h3 style="color:var(--gold-light); font-size:26px; margin-top:0; font-family:var(--font-serif); border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:15px;">명단</h3>
         <div id="guest-list-container" class="guest-grid"></div>
@@ -338,12 +323,10 @@
 </div>
 
 <script>
-    /* ================= 설정 ================= */
     const API_URL = "https://script.google.com/macros/s/AKfycbzauP20JBYekAuxpxM_dO1B3nR2QjuX86A_W6RlqprMRcyqo5tyc0EU6Z9mI0OJoVmwmw/exec";
-    const PLAN_REFRESH_MS = 30000; // 작전 구상 자동 새로고침 간격
-    const SYNC_INTERVAL_MS = 120000; // 내 정보 자동 동기화 간격
+    const PLAN_REFRESH_MS = 30000; 
+    const SYNC_INTERVAL_MS = 120000; 
 
-    // '화면' 시트 D열(연결화면) 또는 A열(이름) → 화면 ID
     const VIEW_ALIAS = {
         'info': 'info', '공지': 'info', '공지사항': 'info',
         'items': 'items', 'item': 'items', '아이템': 'items',
@@ -352,14 +335,12 @@
         'inventory': 'inventory', '소지품': 'inventory'
     };
 
-    /* ================= 상태 ================= */
     let pw = null, me = null, sys = null, plan = null;
     let currentView = 'login', lastSync = 0, invGroups = [], guestCache = [];
     const planState = { pageId: null, order: 'new', editing: null, replyOpen: new Set(), expanded: new Set(), lastLoad: null };
 
     const $ = id => document.getElementById(id);
 
-    /* ================= 유틸 ================= */
     function esc(s) {
         return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
@@ -436,7 +417,6 @@
         setTimeout(() => input.focus(), 50);
     }
 
-    /* ================= 통신 ================= */
     async function api(action, data = {}, { loading = true, silent = false } = {}) {
         if (loading) showLoading(true);
         try {
@@ -452,7 +432,6 @@
         }
     }
 
-    /* ================= 로그인 / 동기화 ================= */
     async function attemptLogin(auto = false, autoPw = null) {
         const input = autoPw || $('login-pw').value.trim();
         if (!input) return alert('비밀번호를 입력해주세요.');
@@ -490,7 +469,6 @@
         else if (currentView === 'guest-list') renderGuests();
     }
 
-    /* ================= 내비게이션 ================= */
     window.addEventListener('popstate', e => {
         if (e.state && e.state.viewId && (pw || e.state.viewId === 'login')) navUIOnly(e.state.viewId, e.state.title);
         else navUIOnly('login', '');
@@ -542,7 +520,6 @@
 
     function openInventoryView() { nav('inventory', '내 소지품'); }
 
-    /* ================= 상단 바 ================= */
     function updateTopBar() {
         if (!me) return;
         $('ui-name').innerText = me.name;
@@ -555,7 +532,6 @@
         $('ui-inv-alert').style.display = hasNewItems() ? 'inline-block' : 'none';
     }
 
-    /* ================= 로비 (화면 시트) ================= */
     function renderScreens() {
         const box = $('screen-list');
         const screens = (sys && sys.screens) || [];
@@ -579,7 +555,6 @@
         nav(target, s.name);
     }
 
-    /* ================= 공지 ================= */
     function renderNotices() {
         const list = $('notice-list');
         const notices = (sys && sys.notices) || [];
@@ -598,7 +573,6 @@
         }).join('');
     }
 
-    /* ================= 아이템 (아이템 시트, D열 체크만) ================= */
     function renderItems() {
         const list = $('items-list');
         const items = (sys && sys.items) || [];
@@ -624,7 +598,6 @@
         openModal('modal-item');
     }
 
-    /* ================= 소지품 ================= */
     function invKey() { return `inv_seen_${me.name}`; }
     function invCounts() { const c = {}; (me.inventory || []).forEach(n => c[n] = (c[n] || 0) + 1); return c; }
     function hasNewItems() {
@@ -699,7 +672,6 @@
         setTimeout(() => $('mt-target').focus(), 50);
     }
 
-    /* ================= 명단 ================= */
     function renderGuests() {
         const box = $('guest-list-container');
         const guests = ((sys && sys.guests) || []).slice().sort((a, b) => a.name.localeCompare(b.name, 'ko'));
@@ -735,7 +707,6 @@
         }).join('');
     }
 
-    /* ================= 프로필 (새 탭) ================= */
     function openDoc(i) {
         const g = guestCache[i];
         if (!g.link) return alert('등록된 프로필 링크가 없습니다.');
@@ -744,7 +715,6 @@
         window.open(url, '_blank', 'noopener');
     }
 
-    /* ================= 작전 구상 ================= */
     function findGuest(name) { return ((sys && sys.guests) || []).find(g => g.name === name); }
     function avatarHtml(name, small = false) {
         const g = findGuest(name);
@@ -809,7 +779,6 @@
     }
 
     function renderPosts(pageId) {
-        // 작성 중인 댓글/수정 내용 보존
         const drafts = {};
         document.querySelectorAll('#plan-posts textarea[data-draft]').forEach(t => drafts[t.dataset.draft] = t.value);
         const focused = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.draft : null;
