@@ -87,6 +87,11 @@
         .gallery-img { width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; background: #111014; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--gold-dark); font-family: var(--font-serif); font-size: 13px; margin-bottom: 12px; }
         .gallery-img img { width: 100%; height: 100%; object-fit: cover; }
         .gallery-name { color: var(--gold-light); font-weight: bold; font-size: 17px; text-align: center; margin-bottom: 6px; }
+        .gallery-use { margin-top: 12px; width: 100%; padding: 8px 0; border-radius: 6px; border: 1px solid var(--gold-main); background: rgba(212,178,111,0.08); color: var(--gold-light); font-family: var(--font-main); font-size: 14px; cursor: pointer; transition: 0.2s; }
+        .gallery-use:hover:not(:disabled) { background: var(--gold-dark); color: #fff; }
+        .gallery-use:disabled { border-color: #444; color: #666; background: transparent; cursor: not-allowed; }
+        .gallery-card .gallery-desc { flex: 1; }
+        .gallery-count { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 10px; border: 1px solid var(--gold-dark); color: var(--gold-main); font-size: 13px; font-weight: normal; vertical-align: middle; }
         .gallery-desc { color: #bbb; font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box; }
@@ -180,10 +185,9 @@
             <div class="resource-item">👤 <span id="ui-name">이름</span></div>
             <div class="resource-item">
                 <span style="color:var(--gold-main); font-weight:bold;">존재감</span>&nbsp;<span id="ui-hp">0</span>&nbsp;/&nbsp;<span id="ui-maxhp">0</span>
-                <span id="ui-zero" class="zero-count" title="존재감이 0이 된 횟수"></span>
+                <span id="ui-zero" class="zero-count" title="존재감이 0이 된 횟수 (3번이면 소멸)"></span>
                 <span id="ui-status" class="status-badge" style="display:none;"></span>
             </div>
-            <div class="resource-item inv-btn" onclick="openInventoryView()">소지품 <span id="ui-inv-alert" class="alert-badge" style="display:none;">!</span></div>
         </div>
     </div>
 
@@ -200,7 +204,6 @@
         </div>
     </div>
 
-    <!-- 공용 입력 모달 (쪽 추가/이름 변경) -->
     <div id="modal-prompt" class="modal-overlay">
         <div class="modal-box">
             <h3 id="mp-title">입력</h3>
@@ -209,20 +212,6 @@
             <div class="modal-actions">
                 <button class="btn-primary" id="mp-ok">확인</button>
                 <button class="btn-primary btn-cancel" onclick="closeModal('modal-prompt')">취소</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-transfer" class="modal-overlay">
-        <div class="modal-box">
-            <h3 id="mt-item">아이템 이름</h3>
-            <p style="color:#fff; font-size:15px; margin-bottom:15px;">누구에게 양도하시겠습니까?</p>
-            <input type="text" id="mt-target" class="heal-input" placeholder="받는 사람 이름" list="guest-names" autocomplete="off">
-            <datalist id="guest-names"></datalist>
-            <p style="color:var(--text-sub); font-size:12px; margin:0;">※ 양도하면 내 소지품에서 사라집니다.</p>
-            <div class="modal-actions">
-                <button class="btn-primary" id="mt-ok">양도하기</button>
-                <button class="btn-primary btn-cancel" onclick="closeModal('modal-transfer')">취소</button>
             </div>
         </div>
     </div>
@@ -256,12 +245,11 @@
         <div id="notice-list" style="display:flex; flex-direction:column; gap:15px;"></div>
     </div>
 
-    <!-- 아이템 -->
     <div id="view-items" class="view">
         <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px;">
             <div>
                 <h3>아이템</h3>
-                <p>지금까지 확보한 아이템.</p>
+                <p>지금까지 확보한 아이템입니다. 아이템은 각자 갖는 것이 아니라 모두가 함께 쓰는 공용입니다.<br>사용 버튼이 있는 아이템만 쓸 수 있습니다. 쓰기 전에 작전 구상에서 상의해 주세요.</p>
             </div>
             <span id="items-count" style="color:var(--gold-main); font-size:14px;"></span>
         </div>
@@ -305,14 +293,6 @@
         </div>
     </div>
 
-    <div id="view-inventory" class="view">
-        <div style="margin-bottom:5px; padding-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1);">
-            <h3 style="color:var(--gold-light); font-size:26px; margin:0 0 5px 0; font-family:var(--font-serif);">내 소지품 목록</h3>
-            <p style="color:var(--text-sub); margin:0;">소지한 물건을 사용하거나 다른 사람에게 양도할 수 있습니다.</p>
-        </div>
-        <div class="item-grid" id="inventory-list"></div>
-    </div>
-
     <button id="btn-floating-guest" onclick="nav('guest-list', '명단')">명단</button>
 
     <div id="view-guest-list" class="view">
@@ -331,12 +311,11 @@
         'info': 'info', '공지': 'info', '공지사항': 'info',
         'items': 'items', 'item': 'items', '아이템': 'items',
         'plan': 'plan', '작전 구상': 'plan', '작전구상': 'plan',
-        'guest-list': 'guest-list', '명단': 'guest-list',
-        'inventory': 'inventory', '소지품': 'inventory'
+        'guest-list': 'guest-list', '명단': 'guest-list'
     };
 
     let pw = null, me = null, sys = null, plan = null;
-    let currentView = 'login', lastSync = 0, invGroups = [], guestCache = [];
+    let currentView = 'login', lastSync = 0, guestCache = [];
     const planState = { pageId: null, order: 'new', editing: null, replyOpen: new Set(), expanded: new Set(), lastLoad: null };
 
     const $ = id => document.getElementById(id);
@@ -465,7 +444,6 @@
         if (currentView === 'lobby') renderScreens();
         else if (currentView === 'info') renderNotices();
         else if (currentView === 'items') renderItems();
-        else if (currentView === 'inventory') renderInventory();
         else if (currentView === 'guest-list') renderGuests();
     }
 
@@ -518,18 +496,15 @@
         else if (viewId !== 'login') { renderCurrent(); sync(); }
     }
 
-    function openInventoryView() { nav('inventory', '내 소지품'); }
-
     function updateTopBar() {
         if (!me) return;
         $('ui-name').innerText = me.name;
         $('ui-hp').innerText = showDash(me.hp);
         $('ui-maxhp').innerText = showDash(me.maxHp);
-        $('ui-zero').innerText = `소멸 ${me.zero || 0}회`;
+        $('ui-zero').innerText = `흩어짐 ${me.zero || 0}/3`;
         const st = $('ui-status');
         if (me.status) { st.innerText = me.status; st.style.background = statusColor(me.status); st.style.display = 'inline-block'; }
         else st.style.display = 'none';
-        $('ui-inv-alert').style.display = hasNewItems() ? 'inline-block' : 'none';
     }
 
     function renderScreens() {
@@ -573,6 +548,19 @@
         }).join('');
     }
 
+    // 개수: 시트의 '개수' 열(count)을 쓰고, 없으면 이름 끝의 '×3' / 'x3'을 읽는다. 둘 다 없으면 표시하지 않는다.
+    function itemInfo(it) {
+        let name = String(it.name || ''), count = it.count;
+        if (count === undefined || count === null || String(count).trim() === '') {
+            const m = name.match(/\s*[×xX]\s*(\d+)\s*$/);
+            if (m) { count = m[1]; name = name.slice(0, m.index); } else count = null;
+        }
+        return { name, count: count === null ? null : String(count).trim() };
+    }
+    function isUsable(it) { const u = it.usable; return u === true || ['TRUE', 'true', 'O', 'o', '1', 'Y', 'y'].includes(String(u).trim()); }
+    function isEmpty(it) { const c = itemInfo(it).count; return c !== null && Number(c) <= 0; }
+    function countTag(c) { return c === null ? '' : `<span class="gallery-count">×${esc(c)}</span>`; }
+
     function renderItems() {
         const list = $('items-list');
         const items = (sys && sys.items) || [];
@@ -583,93 +571,33 @@
             return `
                 <div class="gallery-card" onclick="openItemModal(${i})">
                     <div class="gallery-img">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : 'NO IMAGE'}</div>
-                    <div class="gallery-name">${esc(it.name)}</div>
+                    <div class="gallery-name">${esc(itemInfo(it).name)}${countTag(itemInfo(it).count)}</div>
                     <div class="gallery-desc">${esc(it.desc)}</div>
+                    ${isUsable(it) ? `<button class="gallery-use" onclick="event.stopPropagation(); askUseShared(${i})" ${isEmpty(it) ? 'disabled' : ''}>${isEmpty(it) ? '남은 개수 없음' : '사용'}</button>` : ''}
                 </div>`;
         }).join('');
+    }
+
+    function askUseShared(i) {
+        const it = sys.items[i], info = itemInfo(it);
+        confirmBox({ title: info.name, desc: it.desc || '', msg: '이 아이템을 사용하시겠습니까?',
+                     sub: '※ 모두가 함께 쓰는 공용 아이템입니다. 작전 구상에서 상의한 뒤 사용해 주세요.' + (info.count !== null ? ' 사용하면 개수가 1 줄어듭니다.' : '') }, async () => {
+            const res = await api('useSharedItem', { itemName: info.name, row: it.row });
+            if (res && res.success) {
+                await sync(true);
+                alert(`[${info.name}]${getJosa(info.name, '을/를')} 사용했습니다.`);
+            }
+        });
     }
 
     function openItemModal(i) {
         const it = sys.items[i];
         const img = imgUrl(it.img);
         $('mi-img').innerHTML = img ? `<img src="${esc(img)}" alt="" style="max-width:100%; max-height:300px; object-fit:contain; border-radius:8px; border:1px solid var(--gold-dark);">` : '';
-        $('mi-name').innerText = it.name;
+        const info = itemInfo(it);
+        $('mi-name').innerHTML = esc(info.name) + countTag(info.count);
         $('mi-desc').innerText = it.desc || '설명이 없습니다.';
         openModal('modal-item');
-    }
-
-    function invKey() { return `inv_seen_${me.name}`; }
-    function invCounts() { const c = {}; (me.inventory || []).forEach(n => c[n] = (c[n] || 0) + 1); return c; }
-    function hasNewItems() {
-        if (!me) return false;
-        const seen = lsGet(invKey());
-        const cur = invCounts();
-        if (!seen) { lsSet(invKey(), cur); return false; }
-        return Object.keys(cur).some(n => cur[n] > (seen[n] || 0));
-    }
-
-    function renderInventory() {
-        const list = $('inventory-list');
-        const seen = lsGet(invKey()) || {};
-        const cur = invCounts();
-        invGroups = [];
-        const map = {};
-        (me.inventory || []).forEach(n => { if (!map[n]) { map[n] = { name: n, count: 0 }; invGroups.push(map[n]); } map[n].count++; });
-
-        if (!invGroups.length) {
-            list.innerHTML = '<p class="empty-msg" style="grid-column:1/-1;">소지품이 비어있습니다.</p>';
-        } else {
-            list.innerHTML = invGroups.map((g, i) => {
-                const isNew = g.count > (seen[g.name] || 0);
-                const effect = (sys.effects && sys.effects[g.name]) || '효과가 기록되지 않은 소지품입니다.';
-                return `
-                    <div class="item-card ${isNew ? 'is-new' : ''}">
-                        <div class="item-delete-btn" onclick="askDiscard(${i})" title="버리기">✖</div>
-                        <div style="padding-right:30px;">
-                            <div style="color:var(--gold-light); font-weight:bold; font-size:18px;">${esc(g.name)}${g.count > 1 ? `<span class="count-tag">×${g.count}</span>` : ''}${isNew ? '<span class="new-tag">NEW</span>' : ''}</div>
-                            <div style="font-size:14px; color:#ccc; margin-top:8px; white-space:pre-wrap;">${esc(effect)}</div>
-                        </div>
-                        <div style="display:flex; gap:10px; margin-top:15px;">
-                            <button class="btn-outline" style="flex:1; border-color:rgba(255,255,255,0.2);" onclick="askUse(${i})">사용</button>
-                            <button class="btn-outline" style="flex:1; border-color:rgba(255,255,255,0.2);" onclick="openTransfer(${i})">양도</button>
-                        </div>
-                    </div>`;
-            }).join('');
-        }
-        lsSet(invKey(), cur);
-        updateTopBar();
-    }
-
-    function askUse(i) {
-        const g = invGroups[i];
-        confirmBox({ title: g.name, desc: (sys.effects && sys.effects[g.name]) || '', msg: '사용하시겠습니까?', sub: '※ 사용하면 소지품 목록에서 1개 사라집니다.' }, async () => {
-            const res = await api('useItem', { itemName: g.name });
-            if (res && res.success) { applyData(res); renderInventory(); alert(`[${g.name}]${getJosa(g.name, '을/를')} 사용했습니다.`); }
-        });
-    }
-
-    function askDiscard(i) {
-        const g = invGroups[i];
-        confirmBox({ title: g.name, msg: '이 소지품을 버리시겠습니까?', sub: '※ 효과는 적용되지 않고 1개가 사라집니다.' }, async () => {
-            const res = await api('discardItem', { itemName: g.name });
-            if (res && res.success) { applyData(res); renderInventory(); alert(`[${g.name}]${getJosa(g.name, '을/를')} 버렸습니다.`); }
-        });
-    }
-
-    function openTransfer(i) {
-        const g = invGroups[i];
-        $('mt-item').innerText = g.name;
-        $('mt-target').value = '';
-        $('guest-names').innerHTML = ((sys && sys.guests) || []).filter(x => x.name !== me.name).map(x => `<option value="${esc(x.name)}">`).join('');
-        $('mt-ok').onclick = async () => {
-            const target = $('mt-target').value.trim();
-            if (!target) return alert('받는 사람 이름을 입력해주세요.');
-            closeModal('modal-transfer');
-            const res = await api('giveItem', { itemName: g.name, target });
-            if (res && res.success) { applyData(res); renderInventory(); alert(`[성공]\n[${g.name}]${getJosa(g.name, '을/를')} ${res.targetName} 님에게 양도했습니다.`); }
-        };
-        openModal('modal-transfer');
-        setTimeout(() => $('mt-target').focus(), 50);
     }
 
     function renderGuests() {
@@ -692,7 +620,7 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
                         <div style="font-size:12px; color:#fff; font-weight:bold; display:flex; align-items:center; flex-wrap:wrap;">
                             <span style="color:var(--gold-main); margin-right:4px;">존재감</span> ${max > 0 ? `${hp} / ${max}` : '-'}
-                            <span class="zero-pill" title="존재감이 0이 된 횟수">소멸 ${g.zero || 0}</span>
+                            <span class="zero-pill" title="존재감이 0이 된 횟수 (3번이면 소멸)">흩어짐 ${g.zero || 0}/3</span>
                             ${badge}
                         </div>
                         <button title="프로필 새 탭으로 열기" class="btn-outline" style="padding:2px 10px; font-size:12px; border-color:var(--gold-main); color:var(--gold-light); border-radius:4px; height:24px; line-height:1;" onclick="openDoc(${i})">▶</button>
